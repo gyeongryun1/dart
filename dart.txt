@@ -1,0 +1,151 @@
+void main() {
+  //  variable : data 타입에 따라 자동으로 타입이 정해진다
+  var name= '코드 팩토리';
+  print(name);
+  //   name = 20; 선언된 이후에는 타입을 바꿀 수 없다.
+  
+  //  .runtimType : 타입을 반환
+  print(name.runtimeType);
+  
+  String name1 = '문자열1';
+  String name2 = '문자열2';
+  
+  // 문자열 안에서 변수를 쓰는방법
+  print('${name1} ${name2}');
+  
+  //  dynamic : var 타입과 비슷하지만 이미 선언된 변수의 타입을 바꿀 수 있다.
+  dynamic dy = '문자열1';
+  dy = 2;
+  print(dy.runtimeType);
+  
+  //  nullable - null이 될 수 있다.
+  //  non-nullable - null이 될 수 없다
+  //  null - 아무런 값도 있지 않다.
+  
+  //  name = null; String에 null을 넣을 수 없다.
+  String? name3 = null; // ? : nullable
+  //   Sring name5! = null; // ! : non-nullalble
+  
+  //  final, const 선언된 변수의 값을 후에 바꿀 수 없다
+  //  final String name5 = '문자열';
+  //  const String name6 = '문자열';
+  final  name4 = '문자열'; // 타입을 생략해서 var처럼 사용 가능
+  const  name5 = '문자열';
+  
+  // 코드를 실행한 순간의 시간을 반환
+  //  DateTime now = DateTime.now();
+  //  print(now);
+  
+  final DateTime now = DateTime.now(); // 빌드타임에 값을 몰라도 된다
+  //   const DateTime now2 = DateTime.now(); // 빌드타임에 값을 알아야한다.
+  
+  //  ?? = null일 경우 default값 
+  double? number = null;
+  number ??= 3.0;
+  
+  int number1 = 1;
+  
+  //  is : 조건식
+  number1 = 1;
+  print(number is int);
+  print(number is String);
+
+  print(number is! int);
+  print(number is! String);
+    
+  //  ********* List
+  List<String> string = [name1,name2,name4];
+  List<int> integer = [1,2,3,4];
+  
+  print(string);
+  print(integer);
+  //  인덱스
+  print(string[0]);
+  //  길이
+  print(string.length);
+  //  data 추가  
+  string.add('추가문자열');
+  print(string);
+  //  data 삭제
+  string.remove('추가문자열');
+  print(string);
+  // 인덱스 가져오기
+  print(string.indexOf('문자열2'));
+  
+  //  ********* Map
+  Map<String,String> dictionary = {
+    'key1' : 'value1',
+    'key2' : 'value2',
+    'key3' : 'value3'
+  };
+  print(dictionary);
+  
+  //  key value 추가
+  dictionary.addAll({
+    'key4' : 'value4'
+  });
+  print(dictionary);
+  
+  print(dictionary['key4']);
+  //  key value 추가  
+  dictionary['key5'] = 'value5';
+  print(dictionary);
+  //  value 수정
+  dictionary['key5'] = 'updated value5';
+  print(dictionary);
+  //  data 삭제
+  dictionary.remove('key5');
+  print(dictionary);
+  
+  print(dictionary.keys);
+  print(dictionary.values);
+  
+  //  Set : List와 달리 중복이 허용되지 않음
+  final Set<String> names = {
+    '문자열1',
+    '문자열2',
+    '문자열3',
+    '문자열3', // 중복 값 자동으로 무시
+    '문자열3' // 중복 값 자동으로 무시
+  };
+  print(names);
+  print(names.contains('문자열2'));
+  
+  //  for loop
+  List<int> numbers = [1,2,3,4,5,6];
+  for(int number in numbers){
+    print(number);
+  }
+  
+  Operation operation = add;
+  
+    int result = operation(10,20,30);
+    print(result);
+    
+    operation = subtract;
+    
+    int result2 = operation(10,20,30);
+    print(result2);
+   
+    int result3 = calculate(20,40,60,add);
+    print(result2);
+  
+}
+  
+//  signature
+  typedef Operation = int Function(int x, int y, int z);
+
+  int add(int x, int y, int z) => x+y+z;
+  int subtract(int x, int y, int z) => x-y-z;
+
+  int calculate(int x, int y, int z, Operation operation) {
+    return operation(x,y,z);
+  }
+
+
+
+
+
+
+
+

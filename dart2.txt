@@ -1,0 +1,146 @@
+void main() {
+  List<String> list = ['문자열1', '문자열2', '문자열3', '문자열4'];
+
+  // **  List -> Map, Set 변환
+  print(list);
+  print(list.asMap());
+  print(list.toSet());
+
+  // ** Map - >
+  Map map = list.asMap();
+
+  // Iterable
+  print(map.keys);
+  print(map.values);
+
+  // List
+  print(map.keys.toList());
+  print(map.values.toList);
+
+  // ** List -> Set
+  Set set = Set.from(list);
+  print(set.toList());
+
+  // map 함수 : 새로운 List를 반환
+  final newList1 = list.map((x) {
+    return '추가1 ${x}';
+  });
+
+  final newList2 = list.map((x) => '추가2 $x');
+
+  print(list);
+  print(newList2.toList());
+
+  print(list == list);
+  print(newList1 == list);
+  print(newList2 == newList1);
+
+  // [1.jpg, 3.jpg, 5.jpg, 7.jpg, 9.jpg]
+  String number = '13579';
+
+  // split : String을 쪼개서 List로 반환
+  final parsed = number.split('').map((x) => '$x.jpg').toList();
+  print(parsed);
+
+  Map<String, String> map2 = {
+    'key1': 'value1',
+    'key2': 'value2',
+    'key3': 'value3'
+  };
+
+  // map의 key와 value 따로 변환
+  final result = map2.map((key, value) => MapEntry('추가 $key', '추가 $value'));
+
+  print(map2);
+  print(result);
+
+  final keys = map2.keys.map((x) => '**$x').toList();
+  final values = map2.values.map((x) => '++$x').toList();
+
+  print(keys);
+  print(values);
+
+  //  ** Set
+  Set set1 = {
+    '문자열1',
+    '문자열2',
+    '문자열3',
+    '문자열4',
+  };
+
+  final newSet = set.map((x) => '++$x').toSet();
+  print(newSet);
+
+  List<Map<String, String>> people = [
+    {'name': '홍길동1', 'group': 'group1'},
+    {'name': '홍길동2', 'group': 'group1'},
+    {'name': '홍길동3', 'group': 'group2'}
+  ];
+
+  print(people);
+  // where
+  final ex = people.where((x) => x['group'] == 'group1').toList();
+  print(ex);
+
+  List<int> numbers = [1, 3, 5, 7, 9];
+
+  //  reduce
+  final result1 = numbers.reduce((prev, next) {
+    print('---------------------------');
+    print('previous : $prev');
+    print('next : $next');
+    print('total : ${prev + next}');
+    return prev + next;
+  });
+
+  List<String> words = [
+    '이 ',
+    '문장을 ',
+    '더한다',
+  ];
+
+  final sentence = words.reduce((prev, next) => prev + next);
+  print(sentence);
+
+  //  fold
+  final sum = numbers.fold<int>(0, (prev, next) => prev + next);
+  print(sum);
+
+  final count = words.fold<int>(0, (prev, next) => prev + next.length);
+  print(count);
+
+  // cascading operator
+  // ...
+  List<int> even = [2, 4, 6, 8];
+
+  List<int> odd = [1, 3, 5, 7];
+
+  print([...even, ...odd]);
+  print([even, odd]);
+
+  //  Data를 클래스로
+
+  print(people);
+
+  final parsedPeople =
+      people.map((x) => Person(name: x['name']!, group: x['group']!)).toList();
+
+  print(parsedPeople);
+
+  for (Person person in parsedPeople) {
+    print(person.name);
+    print(person.group);
+  }
+}
+
+class Person {
+  final String name;
+  final String group;
+
+  Person({required this.name, required this.group});
+
+  @override
+  String toString() {
+    return 'Person(name: $name, group:$group)';
+  }
+}
